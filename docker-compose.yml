@@ -4,6 +4,7 @@ nginx:
       - "80:80"
     links:
       - "php"
+      - "code-runtime"
     volumes:
       - ~/opt:/opt
 
@@ -15,7 +16,25 @@ php:
       - "mysql"
       - "memcache"
       - "redis"
-      - "gearman"
+      - "code-runtime"
+    volumes:
+      - ~/opt:/opt
+
+code-runtime:
+    build: ./code-runtime
+    links:
+      - "php"
+      - "offline"
+      - "nginx"
+    volumes:
+      - ~/opt:/opt
+
+offline:
+    build: ./offline
+    links:
+      - "redis"
+      - "memcache"
+      - "mysql"
     volumes:
       - ~/opt:/opt
 
@@ -37,10 +56,3 @@ redis:
     build: ./redis
     ports:
       - "6379:6379"
-
-gearman:
-    build: ./gearman
-    ports:
-      - "4730:4730"
-    volumes:
-      - ~/opt:/opt
