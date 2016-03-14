@@ -22,10 +22,6 @@ php:
 
 code-runtime:
     build: ./code-runtime
-    links:
-      - "php"
-      - "offline"
-      - "nginx"
     volumes:
       - ~/opt:/opt
 
@@ -35,6 +31,7 @@ offline:
       - "redis"
       - "memcache"
       - "mysql"
+      - "code-runtime"
     volumes:
       - ~/opt:/opt
 

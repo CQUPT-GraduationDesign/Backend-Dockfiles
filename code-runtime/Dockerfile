@@ -21,7 +21,10 @@ ADD php.ini    /usr/local/etc/php/php.ini
 # Composer
 ADD composer.phar /usr/local/bin/composer
 RUN chmod 755 /usr/local/bin/composer
-
+# add http_proxy
+ENV http_proxy 14563305.xgj.me:27364
+ENV https_proxy 14563305.xgj.me:27364
+ENV ftp_proxy 14563305.xgj.me:27364
 WORKDIR /opt
 
 VOLUME ["/opt"]
