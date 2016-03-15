@@ -4,7 +4,6 @@ nginx:
       - "80:80"
     links:
       - "php"
-      - "code-runtime"
     volumes:
       - ~/opt:/opt
 
@@ -16,12 +15,6 @@ php:
       - "mysql"
       - "memcache"
       - "redis"
-      - "code-runtime"
-    volumes:
-      - ~/opt:/opt
-
-code-runtime:
-    build: ./code-runtime
     volumes:
       - ~/opt:/opt
 
@@ -31,7 +24,6 @@ offline:
       - "redis"
       - "memcache"
       - "mysql"
-      - "code-runtime"
     volumes:
       - ~/opt:/opt
 
