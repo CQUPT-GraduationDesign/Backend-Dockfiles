@@ -1,47 +1,36 @@
-nginx:
-    build: ./nginx
-    ports:
-      - "80:80"
-    links:
-      - "php"
-    volumes:
-      - ~/opt:/opt
-
-php:
-    build: ./php
-    ports:
-      - "9000:9000"
-    links:
-      - "mysql"
-      - "memcache"
-      - "redis"
-    volumes:
-      - ~/opt:/opt
-
-offline:
-    build: ./offline
-    links:
-      - "redis"
-      - "memcache"
-      - "mysql"
-    volumes:
-      - ~/opt:/opt
-
-mysql:
-    build: ./mysql
-    ports:
-      - "3306:3306"
-    volumes:
-      - ~/opt/data/mysql:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: 123456
-
-memcache:
-    build: ./memcache
-    ports:
-      - "11211:11211"
-
-redis:
-    build: ./redis
-    ports:
-      - "6379:6379"
+version: '2'
+services:
+        http:
+            image: nginx-gd
+            ports:
+                - "80:80"
+            links:
+                - "php"
+            depends_on:
+                - "php"
+            volumes:
+                - ~/opt:/opt
+        php:
+            image: php-gd
+            ports:
+                - "9001:9000"
+            depends_on:
+                - "redis"
+                - "mysql"
+            links:
+                - "mysql"
+                - "redis"
+            volumes:
+                - ~/opt:/opt
+        mysql:
+             image: mysql-gd
+             ports:
+                - "3306:3306"
+             volumes:
+                - ~/opt/data/mysql:/var/lib/mysql
+             environment:
+                MYSQL_ROOT_PASSWORD: 1234567890
+        redis:
+             image: redis-gd
+             ports:
+                - "6379:6379"
