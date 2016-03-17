@@ -16,7 +16,6 @@ docker-compose -f ./docker-compose.yml up
 `
 ###SETP3
 Place test dir in repo to your ~/opt/htdocs and head to http://youhost/test/index.php to test your docker service status
----
 ##TIPS
 - Place your code ~/opt/htdocs
 - Log in the ~/opt/log
