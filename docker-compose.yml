@@ -1,7 +1,7 @@
 version: '2'
 services:
         http:
-            image: nginx-gd
+            image: nginx-gd:latest
             ports:
                 - "80:80"
             links:
@@ -11,19 +11,21 @@ services:
             volumes:
                 - ~/opt:/opt
         php:
-            image: php-gd
+            image: php-gd:latest
             ports:
                 - "9001:9000"
             depends_on:
                 - "redis"
                 - "mysql"
+                - "memcached"
             links:
                 - "mysql"
                 - "redis"
+                - "memcached"
             volumes:
                 - ~/opt:/opt
         mysql:
-             image: mysql-gd
+             image: mysql-gd:latest
              ports:
                 - "3306:3306"
              volumes:
@@ -34,3 +36,7 @@ services:
              image: redis-gd
              ports:
                 - "6379:6379"
+        memcached:
+             image: memcached-gd:latest 
+             ports:
+                - "11211:11211"
