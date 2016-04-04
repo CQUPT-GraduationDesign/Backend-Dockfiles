@@ -18,5 +18,6 @@ docker-compose -f ./docker-compose.yml up
 Place test dir in repo to your ~/opt/htdocs and head to http://youhost/test/index.php to test your docker service status
 ##TIPS
 - Place your code ~/opt/htdocs
-- Log in the ~/opt/log
-- Mysql persistence data in the ~/opt/data/mysql
+- Log is in the ~/opt/log
+- Mysql persistence data is in the ~/opt/data/mysql
+- There is a file : docker-compose-withoutmysql.yml , it means without mysql in started containers , which can leave more memory for your application (mysql will use alomost 500MB memory).

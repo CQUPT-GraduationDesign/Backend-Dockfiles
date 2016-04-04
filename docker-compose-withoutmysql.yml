@@ -1,0 +1,32 @@
+version: '2'
+services:
+        http:
+            image: nginx-gd:latest
+            ports:
+                - "80:80"
+            links:
+                - "php"
+            depends_on:
+                - "php"
+            volumes:
+                - ~/opt:/opt
+        php:
+            image: php-gd:latest
+            ports:
+                - "9001:9000"
+            depends_on:
+                - "redis"
+                - "memcached"
+            links:
+                - "redis"
+                - "memcached"
+            volumes:
+                - ~/opt:/opt
+        redis:
+             image: redis-gd
+             ports:
+                - "6379:6379"
+        memcached:
+             image: memcached-gd:latest 
+             ports:
+                - "11211:11211"
